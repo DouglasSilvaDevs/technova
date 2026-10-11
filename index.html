@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101722">
+  <meta name="description" content="TechNova: uma vitrine de tecnologia com notebooks, smartphones, áudio, games e acessórios. Projeto demonstrativo em HTML, CSS e JavaScript.">
+  <title>TechNova — Um amanhã mais inteligente</title>
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/catalog.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <svg class="icon-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.8a5.5 5.5 0 0 0-7.8 0L12 6l-1-1.2a5.5 5.5 0 0 0-7.8 7.8L12 22l8.8-9.4a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M2 3h3l3 13h12l2-9H6"/><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3Z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 5h18M3 12h18M3 19h18"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m5 5 14 14M5 19 19 5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M4 12h16M12 4v16"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M4 12h16"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2 4h12v13H2zM14 8h4l4 5v4h-8M14 13h8"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 2 9 4v6c0 5-9 10-9 10S3 17 3 12V6Z"/><path d="m8 12 3 3 5-6"/></symbol>
+    <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M3 14v-3a9 9 0 0 1 18 0v3M3 14H1v7h5v-7ZM21 14h2v7h-5v-7ZM21 21c0 2-4 2-6 2"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M21 3C7 2 2 7 3 15c1 6 9 8 14 2 4-4 4-10 4-14ZM3 22 17 8"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M8 18v-2a7 7 0 1 1 8 0v2M8 18h8M9 22h6M12 18v-8m-3 0 3 3 3-3"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="12" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4M12 14v4"/></symbol>
+    <symbol id="i-plane" viewBox="0 0 24 24"><path d="m2 10 20-8-8 20-4-8ZM10 14 22 2"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M6 6l1 16h10l1-16M10 10v7M14 10v7"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+    <symbol id="i-return" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2 7M3 4v7h7"/></symbol>
+    <symbol id="i-play-store" viewBox="0 0 24 24"><path d="M3 2v20l12-10Z" fill="#35a8fa"/><path d="m3 2 14 7-2 3Z" fill="#40d77d"/><path d="m3 22 14-7-2-3Z" fill="#f55467"/><path d="m17 9 4 2q1 1 0 2l-4 2-2-3Z" fill="#ffca51"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 24 24"><path d="M16 1c.2 2-1.3 4-3.5 4.3C12.2 3.3 13.9 1.3 16 1ZM19 13c0-2.4 2-3.5 2-3.5C19.6 7.5 17.8 7 16.4 7c-1.7 0-2.8 1-4.4 1-1.4 0-2.4-1-4-1C5 7 3 9.3 3 12.5c0 4.2 2.4 9.5 5 9.5 1.2 0 2-1 4-1s2.7 1 4 1c2.2 0 4.3-3.3 5-5 0 0-2-1.1-2-4Z" fill="currentColor"/></symbol>
+  </svg>
+
+  <div class="announcement">
+    <div class="container announcement-inner">
+      <p><svg class="icon"><use href="#i-truck"/></svg> Frete grátis acima de R$ 299 <span class="announcement-extra"> <b>|</b> Troca fácil <b>|</b> Tecnologia para um amanhã melhor</span></p>
+      <div class="utility-links"><span>BRL⌄</span><button type="button" data-info="help">Ajuda</button><button type="button" data-action="track">Acompanhar pedido</button></div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-main">
+      <a class="brand" href="index.html" aria-label="TechNova, página inicial">
+        <img src="assets/icons/favicon.svg" width="45" height="45" alt="">
+        <span><strong>TechNova</strong><small>Um amanhã melhor começa aqui.</small></span>
+      </a>
+      <form class="search-form" id="search-form" role="search">
+        <label class="sr-only" for="search-input">Buscar produtos</label>
+        <svg class="icon"><use href="#i-search"/></svg>
+        <input id="search-input" type="search" placeholder="Busque produtos, marcas e muito mais..." autocomplete="off">
+        <button type="submit" aria-label="Buscar"><svg class="icon"><use href="#i-search"/></svg></button>
+      </form>
+      <div class="header-actions">
+        <button type="button" class="header-action account-action" data-action="account"><svg class="icon"><use href="#i-user"/></svg><span><small>Olá! Entre</small>Minha conta⌄</span></button>
+        <button type="button" class="header-action" data-action="favorites" aria-label="Abrir favoritos"><svg class="icon"><use href="#i-heart"/></svg><span>Favoritos</span><b class="badge favorites-count" hidden>0</b></button>
+        <button type="button" class="header-action cart-action" data-action="cart" aria-label="Abrir carrinho"><svg class="icon"><use href="#i-cart"/></svg><span>Carrinho</span><b class="badge cart-count">0</b></button>
+        <button type="button" class="header-action mobile-menu-button" id="menu-toggle" aria-label="Abrir categorias" aria-expanded="false" aria-controls="category-nav"><svg class="icon"><use href="#i-menu"/></svg></button>
+      </div>
+    </div>
+    <nav class="navigation" aria-label="Categorias de produtos">
+      <div class="container nav-inner" id="category-nav">
+        <button type="button" class="nav-all" data-filter="all"><svg class="icon"><use href="#i-menu"/></svg>Todas as categorias <small>⌄</small></button>
+        <button type="button" data-filter="laptops">Notebooks</button>
+        <button type="button" data-filter="smartphones">Smartphones</button>
+        <button type="button" data-filter="accessories">Acessórios</button>
+        <button type="button" data-filter="gaming">Games</button>
+        <button type="button" data-filter="smart-home">Casa inteligente</button>
+        <button type="button" data-filter="audio">Áudio</button>
+        <button type="button" data-filter="wearables">Smartwatches</button>
+        <button type="button" data-filter="cameras">Câmeras</button>
+        <button type="button" class="deals-link" data-action="offers">Ofertas</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" aria-label="Destaques da TechNova" aria-roledescription="carrossel">
+      <img class="hero-art" src="assets/images/hero-tech-hd.png" width="2046" height="769" alt="Notebook, smartphone, fones sem fio e smartwatch sobre uma superfície de pedra" fetchpriority="high" decoding="async">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow" id="hero-eyebrow">TECNOLOGIA DO FUTURO</p>
+          <h1 id="hero-title">Um amanhã<br>mais inteligente<br><span>começa aqui.</span></h1>
+          <p class="hero-description" id="hero-description">Explore novas possibilidades. Evolua seu dia a dia.</p>
+          <button class="button gradient-button" type="button" id="hero-cta">Explore o futuro <svg class="icon"><use href="#i-arrow"/></svg></button>
+          <div class="hero-perks"><span><svg class="icon"><use href="#i-bulb"/></svg>Produtos inovadores</span><span><svg class="icon"><use href="#i-shield"/></svg>Marcas de confiança</span><span><svg class="icon"><use href="#i-leaf"/></svg>Um dia a dia melhor</span></div>
+        </div>
+        <div class="slider-controls">
+          <button type="button" class="slider-arrow prev" id="hero-prev" aria-label="Destaque anterior"><svg class="icon"><use href="#i-chevron"/></svg></button>
+          <div class="slider-dots" aria-label="Selecionar destaque"><button type="button" data-slide="0" class="is-active" aria-label="Destaque 1" aria-current="true"></button><button type="button" data-slide="1" aria-label="Destaque 2"></button><button type="button" data-slide="2" aria-label="Destaque 3"></button><button type="button" data-slide="3" aria-label="Destaque 4"></button></div>
+          <button type="button" class="slider-arrow" id="hero-next" aria-label="Próximo destaque"><svg class="icon"><use href="#i-chevron"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <div class="container main-content">
+      <section class="categories" aria-label="Compre por categoria">
+        <button class="category" type="button" data-filter="laptops"><span class="category-art"><img src="assets/images/product-laptop-hd.png" alt="" width="1024" height="1024" decoding="async"></span><span>Notebooks</span></button>
+        <button class="category" type="button" data-filter="smartphones"><span class="category-art"><img src="assets/images/product-phone-hd.png" alt="" width="1024" height="1024" decoding="async"></span><span>Smartphones</span></button>
+        <button class="category" type="button" data-filter="audio"><span class="category-art"><img src="assets/images/headphones-hd.png" alt="" width="1024" height="1024" decoding="async"></span><span>Áudio</span></button>
+        <button class="category" type="button" data-filter="wearables"><span class="category-art"><img src="assets/images/product-watch-hd.png" alt="" width="1024" height="1024" decoding="async"></span><span>Smartwatches</span></button>
+        <button class="category" type="button" data-filter="smart-home"><span class="category-art"><img src="assets/images/home-voice-sphere-hd.png" alt="" width="1024" height="1024" decoding="async"></span><span>Casa inteligente</span></button>
+        <button class="category" type="button" data-filter="gaming"><span class="category-art"><img src="assets/images/product-controller-hd.png" alt="" width="1024" height="1024" decoding="async"></span><span>Games</span></button>
+        <button class="category" type="button" data-filter="cameras"><span class="category-art"><img src="assets/images/mirrorless-camera-hd.png" alt="" width="1024" height="1024" decoding="async"></span><span>Câmeras</span></button>
+        <button class="category" type="button" data-filter="accessories"><span class="category-art"><img src="assets/images/backpack-hd.png" alt="" width="1024" height="1024" decoding="async"></span><span>Acessórios</span></button>
+      </section>
+
+      <section class="product-section" id="catalogo" aria-labelledby="catalog-title">
+        <div class="section-heading"><h2 id="catalog-title">Produtos em alta</h2><button class="text-link" type="button" data-action="view-all">Ver todos <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+        <div class="filter-bar" id="filter-bar" hidden>
+          <p id="filter-description" role="status"></p>
+          <div class="filter-actions">
+            <label class="catalog-sort" for="catalog-sort">Ordenar:
+              <select id="catalog-sort"><option value="relevance">Destaques</option><option value="price-asc">Menor preço</option><option value="price-desc">Maior preço</option><option value="name">Nome: A–Z</option></select>
+            </label>
+            <button type="button" id="clear-filter">Limpar filtros <svg class="icon"><use href="#i-close"/></svg></button>
+          </div>
+        </div>
+        <div class="product-grid" id="trending-grid"></div>
+        <div class="catalog-more" id="catalog-more" hidden><p id="catalog-progress" role="status"></p><button class="button dark-button" type="button" data-action="load-more">Carregar mais produtos <svg class="icon"><use href="#i-plus"/></svg></button></div>
+        <noscript><p>Ative o JavaScript para visualizar o catálogo e usar os recursos da loja.</p></noscript>
+      </section>
+
+      <section class="promotions" id="promocoes" aria-label="Ofertas e novidades">
+        <article class="promotion flash-promotion">
+          <img src="assets/images/headphones-hd.png" alt="Fones de ouvido com iluminação em roxo" width="1024" height="1024" loading="lazy" decoding="async">
+          <div class="promotion-copy"><h2><span aria-hidden="true">ϟ</span> OFERTAS <em>RELÂMPAGO</em></h2><p>Mais tecnologia. Menor preço.<br>Aproveite por tempo limitado!</p><div class="flash-actions"><button class="button white-button" type="button" data-action="offers">Aproveitar <svg class="icon"><use href="#i-arrow"/></svg></button><div class="countdown" aria-label="Tempo restante da oferta ilustrativa"><span><strong id="hours">12</strong><small>Horas</small></span><span><strong id="minutes">36</strong><small>Min</small></span><span><strong id="seconds">18</strong><small>Seg</small></span></div></div></div>
+        </article>
+        <article class="promotion arrivals-promotion">
+          <img src="assets/images/new-arrivals-hd.png" alt="Novos smartphones prateado e preto" width="2048" height="768" loading="lazy" decoding="async">
+          <span class="new-badge">NOVO</span>
+          <div class="promotion-copy"><h2>Novidades</h2><p>Descubra agora o que<br>vem por aí!</p><button class="button dark-button" type="button" data-action="new-arrivals">Explorar <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+        </article>
+      </section>
+
+      <section class="product-section recommended-section" aria-labelledby="recommended-title">
+        <div class="section-heading"><h2 id="recommended-title">Selecionados para você</h2><button class="text-link" type="button" data-action="view-all">Ver todos <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+        <div class="product-grid" id="recommended-grid"></div>
+      </section>
+
+      <section class="benefits" aria-label="Vantagens da TechNova">
+        <button type="button" class="benefit" data-info="shipping"><span class="benefit-icon"><svg class="icon"><use href="#i-truck"/></svg></span><span><strong>Frete grátis</strong><small>Em compras acima de R$ 299</small></span></button>
+        <button type="button" class="benefit" data-info="returns"><span class="benefit-icon"><svg class="icon"><use href="#i-shield"/></svg></span><span><strong>Troca fácil</strong><small>Mais tranquilidade para escolher</small></span></button>
+        <button type="button" class="benefit" data-info="help"><span class="benefit-icon"><svg class="icon"><use href="#i-headphones"/></svg></span><span><strong>Suporte dedicado</strong><small>Estamos por perto para ajudar</small></span></button>
+        <button type="button" class="benefit" data-info="products"><span class="benefit-icon"><svg class="icon"><use href="#i-leaf"/></svg></span><span><strong>Produtos selecionados</strong><small>Tecnologia para o seu dia a dia</small></span></button>
+      </section>
+    </div>
+
+    <section class="newsletter" aria-labelledby="newsletter-title">
+      <div class="container newsletter-inner">
+        <div><h2 id="newsletter-title">Faça parte da <span>TechNova+</span></h2><p>Ofertas especiais, novidades em primeira mão<br>e inspiração para sua próxima escolha.</p></div>
+        <form id="newsletter-form"><label class="sr-only" for="newsletter-email">Seu e-mail</label><input type="email" id="newsletter-email" name="email" placeholder="Digite seu e-mail" autocomplete="email" required><button class="button" type="submit">Quero participar</button></form>
+        <p class="newsletter-note"><svg class="icon"><use href="#i-plane"/></svg><span>Mais novidades<br>direto na sua caixa!</span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand"><a class="brand" href="index.html"><img src="assets/icons/favicon.svg" alt="" width="42" height="42"><span><strong>TechNova</strong><small>Um amanhã melhor começa aqui.</small></span></a><div class="social-links" aria-label="Redes sociais"><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1"/></svg></a><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22 7q0-3-3-3H5Q2 4 2 7v10q0 3 3 3h14q3 0 3-3z" fill="currentColor" stroke="none"/><path d="m10 8 6 4-6 4z" fill="white" stroke="none"/></svg></a><a href="https://x.com/" target="_blank" rel="noopener noreferrer" aria-label="X">𝕏</a><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a></div></div>
+      <div class="footer-column"><h3>Compre</h3><button type="button" data-action="view-all">Todos os produtos</button><button type="button" data-action="new-arrivals">Novidades</button><button type="button" data-filter="all">Mais vendidos</button><button type="button" data-action="offers">Ofertas</button><button type="button" data-info="gift">Vale-presente</button></div>
+      <div class="footer-column"><h3>Suporte</h3><button type="button" data-action="track">Acompanhar pedido</button><button type="button" data-info="returns">Trocas e devoluções</button><button type="button" data-info="help">Central de ajuda</button><button type="button" data-info="contact">Fale conosco</button><button type="button" data-info="guide">Guia de compra</button></div>
+      <div class="footer-column"><h3>Sobre</h3><button type="button" data-info="about">Nossa história</button><button type="button" data-info="sustainability">Sustentabilidade</button><button type="button" data-info="careers">Carreiras</button><button type="button" data-info="blog">Blog</button><button type="button" data-info="press">Imprensa</button></div>
+      <div class="footer-app"><h3>Leve a TechNova com você</h3><p>Tecnologia onde você estiver</p><button type="button" class="app-badges" data-info="app" aria-label="Informações sobre o aplicativo TechNova"><span class="store-badge"><svg aria-hidden="true"><use href="#i-play-store"/></svg><span><small>DISPONÍVEL NO</small><strong>Google Play</strong></span></span><span class="store-badge"><svg aria-hidden="true"><use href="#i-apple"/></svg><span><small>BAIXAR NA</small><strong>App Store</strong></span></span></button></div>
+    </div>
+    <div class="container footer-bottom"><p>© 2026 TechNova. Projeto demonstrativo.</p><div class="payment-methods"><span><svg class="icon"><use href="#i-lock"/></svg>Compra segura</span><b class="visa">VISA</b><span class="mastercard" aria-label="Mastercard"><i></i><i></i></span><b class="paypal">▰ PayPal</b></div><p class="footer-tagline">Tecnologia<br>que transforma.</p></div>
+  </footer>
+
+  <dialog class="modal" id="main-dialog" aria-labelledby="dialog-title"><div class="dialog-header"><h2 id="dialog-title"></h2><button class="icon-button" type="button" id="dialog-close" aria-label="Fechar janela"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-content" id="dialog-content"></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

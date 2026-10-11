@@ -1,0 +1,72 @@
+/* Verificações úteis do catálogo, dos totais e dos assets. */
+import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
+import { access, readFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+import { createHash } from 'node:crypto';
+const require = createRequire(import.meta.url);
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const C = require(resolve(root, 'js/catalog.js'));
+
+assert.equal(new Set(C.products.map(p => p.id)).size, C.products.length, 'IDs únicos');
+assert.equal(new Set(C.products.map(p => p.name)).size, C.products.length, 'Modelos com nomes distintos');
+assert.equal(C.products.length, 80, 'Oito categorias com dez modelos');
+for (const category of Object.keys(C.categories).filter(key => key !== 'all')) {
+  const models = C.filterProducts({ category, mode: 'all' });
+  assert.equal(models.length, 10, `Dez opções em ${category}`);
+  assert.equal(C.categoryCounts[category], models.length, `Contagem de ${category}`);
+  assert.equal(new Set(models.map(p => p.image)).size, 10, `Dez imagens próprias em ${category}`);
+  assert.ok(models.every(p => p.specs.length >= 3 && p.description && p.subtitle), `Detalhes de ${category}`);
+}
+assert.equal(new Set(C.filterProducts({ category: 'wearables', mode: 'all' }).map(p => p.image)).size, 10, 'Imagem própria para cada smartwatch');
+assert.equal(new Set(C.products.map(p => p.image)).size, 80, 'Nenhuma foto de produto repetida no catálogo');
+assert.ok(C.products.every(p => Number.isSafeInteger(p.price) && p.price > 0), 'Preços em centavos');
+assert.deepEqual(C.totals({}), { subtotal: 0, shipping: 0, total: 0, quantity: 0 });
+assert.deepEqual(C.totals({ earbuds: 1 }), { subtotal: 24990, shipping: 1990, total: 26980, quantity: 1 });
+assert.deepEqual(C.totals({ earbuds: 1, bulbs: 1 }), { subtotal: 31980, shipping: 0, total: 31980, quantity: 2 });
+assert.deepEqual(C.sanitizeCart({ unknown: 3, keyboard: -2, earbuds: 1.5, controller: 200, watch: '2' }), { controller: 99 });
+assert.deepEqual(C.sanitizeCart(null), {});
+assert.deepEqual(C.sanitizeFavorites(['phone', 'invalid', 'phone', 'ssd']), ['phone', 'ssd']);
+assert.deepEqual(C.setQuantity({ phone: 2 }, 'phone', 0), {});
+assert.equal(C.addItem({ phone: 98 }, 'phone', 8).phone, 99);
+assert.deepEqual(C.addItem({}, 'phone', -1), {});
+assert.equal(C.filterProducts({ query: 'ÁUDIO', mode: 'all' })[0].id, 'earbuds');
+assert.equal(C.filterProducts({ category: 'gaming', mode: 'all' })[0].id, 'controller');
+assert.equal(C.filterProducts({ query: 'naoexiste', mode: 'all' }).length, 0);
+assert.equal(C.filterProducts().length, 5);
+assert.equal(C.filterProducts({ mode: 'all' }).length, 80);
+assert.equal(C.filterProducts({ query: 'smartwatch', mode: 'all' }).length, 10);
+assert.ok(C.filterProducts({ query: 'GPS', mode: 'all' }).some(p => p.id === 'fitnova-ultra'), 'Busca nas especificações');
+const originalOrder = C.products.map(p => p.id);
+const cheapest = C.filterProducts({ mode: 'all', sort: 'price-asc' });
+const expensive = C.filterProducts({ mode: 'all', sort: 'price-desc' });
+assert.ok(cheapest.every((p, index) => !index || cheapest[index - 1].price <= p.price), 'Menor preço');
+assert.ok(expensive.every((p, index) => !index || expensive[index - 1].price >= p.price), 'Maior preço');
+const alphabetical = C.filterProducts({ mode: 'all', sort: 'name' });
+assert.ok(alphabetical.every((p, index) => !index || alphabetical[index - 1].name.localeCompare(p.name, 'pt-BR') <= 0), 'Ordenação alfabética');
+assert.deepEqual(C.products.map(p => p.id), originalOrder, 'Ordenar preserva o catálogo original');
+assert.ok(C.filterProducts({ mode: 'offers' }).every(p => p.previousPrice > p.price));
+assert.ok(C.filterProducts({ mode: 'new' }).every(p => p.isNew));
+const serialized = JSON.parse(JSON.stringify(C.addItem({}, 'ssd', 3)));
+assert.equal(C.totals(C.sanitizeCart(serialized)).subtotal, 149970, 'Persistência e centavos');
+let allModelsCart = {};
+for (const p of C.products) allModelsCart = C.addItem(allModelsCart, p.id, 2);
+assert.equal(C.totals(allModelsCart).quantity, 160, 'Todos os modelos podem entrar no carrinho');
+assert.equal(C.totals(allModelsCart).subtotal, C.products.reduce((sum, p) => sum + p.price * 2, 0), 'Total do catálogo completo');
+const uniqueImages = [...new Map(C.products.map(p => [p.image, p])).values()];
+const hashes = new Set();
+for (const p of uniqueImages) {
+  const path = resolve(root, 'assets/images', p.image);
+  await access(path);
+  const png = await readFile(path);
+  assert.equal(png.subarray(1, 4).toString(), 'PNG', `Imagem PNG: ${p.id}`);
+  const width = png.readUInt32BE(16);
+  const height = png.readUInt32BE(20);
+  assert.ok(width >= 1024 && height >= 1024, `Resolução do produto ${p.id}: ${width} × ${height}`);
+  assert.equal(png[25], 6, `Canal alfa preservado: ${p.id}`);
+  const hash = createHash('sha256').update(png).digest('hex');
+  assert.ok(!hashes.has(hash), `O arquivo de ${p.id} não pode ser uma cópia de outra foto`);
+  hashes.add(hash);
+}
+console.log(`80 modelos, 10 por categoria; busca, ordenação, favoritos, carrinho, frete, totais e ${uniqueImages.length} imagens de produtos: OK.`);
